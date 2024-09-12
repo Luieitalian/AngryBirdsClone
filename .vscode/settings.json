@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "AngryBirdsClone.sln"
+    "dotnet.defaultSolution": "AngryBirdsClone1.sln"
 }
