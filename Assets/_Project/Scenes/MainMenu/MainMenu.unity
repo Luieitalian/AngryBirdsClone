@@ -772,6 +772,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 863538733}
   m_CullTransparentMesh: 1
+--- !u!114 &1235239406 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7636249382089657984, guid: 6625f711ef99d414da4901332f016f3f, type: 3}
+  m_PrefabInstance: {fileID: 8989096110022050781}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 057710af6aec056409c0aeb10bb4a31c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1692841657
 GameObject:
   m_ObjectHideFlags: 0
@@ -849,6 +860,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 547d36536bef6f34da0a3ff98e8df323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneLoader: {fileID: 1235239406}
 --- !u!1 &2040700589
 GameObject:
   m_ObjectHideFlags: 0
@@ -969,6 +981,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7636249382089657984, guid: 6625f711ef99d414da4901332f016f3f, type: 3}
+      propertyPath: transitionAnimator
+      value: 
+      objectReference: {fileID: 8989096110022050783}
     - target: {fileID: 8523607741009799269, guid: 6625f711ef99d414da4901332f016f3f, type: 3}
       propertyPath: m_Name
       value: SceneLoader
@@ -981,6 +997,11 @@ PrefabInstance:
 --- !u!4 &8989096110022050782 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3427763108369263375, guid: 6625f711ef99d414da4901332f016f3f, type: 3}
+  m_PrefabInstance: {fileID: 8989096110022050781}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &8989096110022050783 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6289336002096115068, guid: 6625f711ef99d414da4901332f016f3f, type: 3}
   m_PrefabInstance: {fileID: 8989096110022050781}
   m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807

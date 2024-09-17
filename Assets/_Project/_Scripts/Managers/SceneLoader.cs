@@ -8,9 +8,10 @@ namespace berkepite
     public class SceneLoader : MonoBehaviour
     {
         [SerializeField]
-        private Slider loadingBar;
-        [SerializeField]
         private Animator transitionAnimator;
+
+        [SerializeField]
+        private Slider slider;
 
         public void LoadScene(int sceneIndex)
         {
@@ -25,12 +26,13 @@ namespace berkepite
             while (!operation.isDone)
             {
                 float progress = Mathf.Clamp01(operation.progress / .9f);
-                loadingBar.value = progress;
+                slider?.SetValueWithoutNotify(progress);
                 Debug.Log("loading...");
 
                 if (operation.progress >= 0.9f)
                 {
-                    transitionAnimator.SetTrigger("Start");
+                    if (transitionAnimator != null)
+                        transitionAnimator.SetTrigger("Start");
                     break;
                 }
                 yield return null;

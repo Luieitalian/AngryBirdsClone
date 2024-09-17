@@ -138,6 +138,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 057710af6aec056409c0aeb10bb4a31c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &440036628 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6289336002096115068, guid: 6625f711ef99d414da4901332f016f3f, type: 3}
+  m_PrefabInstance: {fileID: 8284739943617365322}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1074,6 +1079,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1692841658}
     m_Modifications:
+    - target: {fileID: 1207772000652345065, guid: 6625f711ef99d414da4901332f016f3f, type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2010125437529139773, guid: 6625f711ef99d414da4901332f016f3f, type: 3}
       propertyPath: m_Camera
       value: 
@@ -1119,9 +1128,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7636249382089657984, guid: 6625f711ef99d414da4901332f016f3f, type: 3}
+      propertyPath: slider
+      value: 
+      objectReference: {fileID: 774251169}
+    - target: {fileID: 7636249382089657984, guid: 6625f711ef99d414da4901332f016f3f, type: 3}
       propertyPath: loadingBar
       value: 
       objectReference: {fileID: 774251169}
+    - target: {fileID: 7636249382089657984, guid: 6625f711ef99d414da4901332f016f3f, type: 3}
+      propertyPath: transitionAnimator
+      value: 
+      objectReference: {fileID: 440036628}
     - target: {fileID: 8523607741009799269, guid: 6625f711ef99d414da4901332f016f3f, type: 3}
       propertyPath: m_Name
       value: SceneLoader
