@@ -27,9 +27,9 @@ namespace berkepite
 
         private enum SlingshotState
         {
-            None = 0, Idle, Holding, Reloading
+            None = 0, Initialising, Idle, Holding, Reloading
         }
-        private SlingshotState state;
+        private static SlingshotState state = SlingshotState.None;
 
         void Awake()
         {
@@ -52,7 +52,7 @@ namespace berkepite
 
         void Start()
         {
-            state = SlingshotState.Idle;
+            state = SlingshotState.Initialising;
 
             leftLineRenderer = transform.Find("LeftLine").GetComponent<LineRenderer>();
             rightLineRenderer = transform.Find("RightLine").GetComponent<LineRenderer>();
@@ -60,13 +60,20 @@ namespace berkepite
             rightLineRenderer.enabled = false;
 
             centerPos = transform.Find("CenterPivot").position;
+        }
+
+        public void OnTargetsInitFinished()
+        {
             StartCoroutine(InstantiateBird(centerPos, 0f));
+            state = SlingshotState.Idle;
         }
 
         void Update()
         {
             switch (state)
             {
+                case SlingshotState.Initialising:
+                    break;
                 case SlingshotState.Idle:
                     if (touchAction.IsPressed() && IsWithinSlingshotArea())
                         state = SlingshotState.Holding;
@@ -88,6 +95,7 @@ namespace berkepite
                         state = SlingshotState.Reloading;
 
                         StartCoroutine(InstantiateBird(centerPos, 2f));
+                        state = SlingshotState.Idle;
                     }
                     break;
                 case SlingshotState.Reloading:
@@ -95,7 +103,7 @@ namespace berkepite
             }
         }
 
-        void DrawSlings()
+        private void DrawSlings()
         {
             leftLineRenderer.enabled = true;
             rightLineRenderer.enabled = true;
@@ -103,7 +111,7 @@ namespace berkepite
             SetLines(touchPos);
         }
 
-        void SetLines(Vector2 pos)
+        private void SetLines(Vector2 pos)
         {
             leftLineRenderer.SetPosition(1, pos);
             rightLineRenderer.SetPosition(1, pos);
@@ -112,7 +120,7 @@ namespace berkepite
             rightLineRenderer.SetPosition(0, rightLineRenderer.transform.position);
         }
 
-        bool IsWithinSlingshotArea()
+        private bool IsWithinSlingshotArea()
         {
             Vector2 touchPos = Camera.main.ScreenToWorldPoint(touchPosition.ReadValue<Vector2>());
 
@@ -120,20 +128,18 @@ namespace berkepite
             else return false;
         }
 
-        IEnumerator InstantiateBird(Vector2 pos, float time)
+        private IEnumerator InstantiateBird(Vector2 pos, float time)
         {
             yield return new WaitForSeconds(time);
             spawnedBird = Instantiate(redBirdPrefab, pos, Quaternion.identity);
-
-            state = SlingshotState.Idle;
         }
 
-        void LaunchBird(BaseBird bird)
+        private void LaunchBird(BaseBird bird)
         {
             bird.Launch(centerPos - touchPos);
         }
 
-        void SetBirdPosRotation()
+        private void SetBirdPosRotation()
         {
             spawnedBird.transform.position = touchPos + new Vector2(0.15f, 0);
             spawnedBird.transform.right = centerPos - touchPos;

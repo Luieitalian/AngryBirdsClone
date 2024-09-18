@@ -10,3 +10,7 @@
 - [ ] Destroyable structures.
 - [ ] Animated pigs.
 - [ ] Bird flying route when slinging.
+- [ ] Composite colliders for structures.
+- [ ] Level manager.
+- [ ] Bird speed is different depending on the screen size, fix.
+- [x] Target initialization, animations & particles.

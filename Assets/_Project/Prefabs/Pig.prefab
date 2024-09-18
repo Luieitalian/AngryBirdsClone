@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 742622220319540616}
   - component: {fileID: 7625172780296076862}
   - component: {fileID: 9013077502242329646}
+  - component: {fileID: 1594181475259940761}
+  - component: {fileID: 4907911773592409991}
   m_Layer: 0
   m_Name: Pig
   m_TagString: Pig
@@ -169,3 +171,37 @@ MonoBehaviour:
         m_Calls: []
   damageMultiplier: 10
   dieEffect: {fileID: 4066556664262384935, guid: 46d63a800f2ac7049b27149366fe6770, type: 3}
+--- !u!114 &1594181475259940761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8164607902669330392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f5f137bd2632a48bccca25c6c5f588, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnEffect: {fileID: 3389582341696019960, guid: 3f1f8323cab3cd24583fb936ad4e6bd5, type: 3}
+--- !u!95 &4907911773592409991
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8164607902669330392}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 26f014af384ec6b45b12ead53bc4af0d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
