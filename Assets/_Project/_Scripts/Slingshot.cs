@@ -29,7 +29,7 @@ namespace berkepite
         {
             None = 0, Initialising, Idle, Holding, Reloading
         }
-        private static SlingshotState state = SlingshotState.None;
+        private SlingshotState state = SlingshotState.None;
 
         void Awake()
         {

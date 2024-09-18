@@ -6,19 +6,18 @@ using UnityEngine.Events;
 
 namespace berkepite
 {
-    [System.Serializable]
-    public class CHealth
+    [Serializable, CreateAssetMenu(menuName = "Health Component")]
+    public class CHealth : ScriptableObject
     {
         [SerializeField]
         private int m_MaxHealth = 100;
         private int m_CurrentHealth;
 
         public bool isHealthDepleted;
-        public UnityEvent OnHealthDepletedEvent;
+        public Action OnHealthDepletedEvent;
 
         public CHealth()
         {
-            OnHealthDepletedEvent = new UnityEvent();
             m_CurrentHealth = m_MaxHealth;
         }
 
@@ -32,9 +31,9 @@ namespace berkepite
             }
         }
 
-        public void OnHealthDepleted(UnityAction callback)
+        public void OnHealthDepleted(Action callback)
         {
-            OnHealthDepletedEvent.AddListener(callback);
+            OnHealthDepletedEvent += callback;
         }
 
     }

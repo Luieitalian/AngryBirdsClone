@@ -163,12 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e377ec92b630454c9d348eeb76b9365, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Health:
-    m_MaxHealth: 100
-    isHealthDepleted: 0
-    OnHealthDepletedEvent:
-      m_PersistentCalls:
-        m_Calls: []
+  m_Health: {fileID: 11400000, guid: b9dfda8fbcaf1554f8fde395df2c3590, type: 2}
   damageMultiplier: 10
   dieEffect: {fileID: 4066556664262384935, guid: 46d63a800f2ac7049b27149366fe6770, type: 3}
 --- !u!114 &1594181475259940761

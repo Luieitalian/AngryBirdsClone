@@ -1,28 +1,43 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace berkepite
 {
     public class Target : MonoBehaviour
     {
-        [SerializeField] private UnityEvent OnFinishedEvent;
+        [SerializeField] private float initializeInterval;
+        [SerializeField] private float physicsInitializeInterval;
 
         private enum TargetState
         {
             None = 0, Woke, Initialising, Finished
         }
-        private static TargetState targetState = TargetState.None;
+        private TargetState targetState = TargetState.None;
         private List<GameObject> objects;
+        private int pigCount;
+
+        private Action OnFinishedEvent;
+
+        public int PigCount
+        {
+            get { return pigCount; }
+            private set { pigCount = value; }
+        }
 
         void Awake()
         {
+            var levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+            OnFinishedEvent += levelManager.OnTargetFinished;
+
+            pigCount = 0;
+
             objects = new List<GameObject>();
             foreach (Transform child in transform)
             {
                 objects.Add(child.gameObject);
+                if (child.gameObject.CompareTag("Pig")) pigCount++;
             }
         }
 
@@ -32,7 +47,7 @@ namespace berkepite
             {
                 case TargetState.None: break;
                 case TargetState.Woke:
-                    StartCoroutine(InitializeTargetObjects(.25f));
+                    StartCoroutine(InitializeTargetObjects(initializeInterval));
                     targetState = TargetState.Initialising;
                     break;
                 case TargetState.Initialising:
@@ -56,7 +71,7 @@ namespace berkepite
                 yield return new WaitForSeconds(time);
                 objects[i].GetComponent<TargetObject>().Init();
             }
-            StartCoroutine(EnablePhysicsOnTargetObjects(.05f));
+            StartCoroutine(EnablePhysicsOnTargetObjects(physicsInitializeInterval));
         }
 
         private IEnumerator EnablePhysicsOnTargetObjects(float time)

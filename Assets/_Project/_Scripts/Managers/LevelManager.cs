@@ -1,8 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 namespace berkepite
 {
@@ -12,22 +12,28 @@ namespace berkepite
         {
             None = 0, Woke, Initialising, Playing, Won, Lost
         }
-        private static LevelState levelState = LevelState.None;
+        private LevelState levelState = LevelState.None;
         private List<GameObject> targetObjects;
 
         private int targetsFinishedCount = 0;
+        private int pigCount = 0;
 
-        [SerializeField] private UnityEvent OnTargetsFinishedEvent;
+        private SceneLoader sceneLoader;
+        private Action OnTargetsFinishedEvent;
 
         void Awake()
         {
-            targetObjects = new List<GameObject>();
+            sceneLoader = GameObject.Find("SceneLoader").GetComponent<SceneLoader>();
 
+            var slingshot = GameObject.Find("Slingshot").GetComponent<Slingshot>();
+            OnTargetsFinishedEvent += slingshot.OnTargetsInitFinished;
+
+            targetObjects = new List<GameObject>();
             var targets = FindObjectsOfType<Target>();
-            foreach (var item in targets)
+            foreach (var target in targets)
             {
-                targetObjects.Add(item.gameObject);
-                print(item.gameObject.name);
+                targetObjects.Add(target.gameObject);
+                pigCount += target.PigCount;
             }
 
             levelState = LevelState.Woke;
@@ -37,6 +43,8 @@ namespace berkepite
         {
             switch (levelState)
             {
+                case LevelState.None:
+                    break;
                 case LevelState.Woke:
                     foreach (var item in targetObjects)
                     {
@@ -48,6 +56,11 @@ namespace berkepite
                     break;
                 case LevelState.Playing:
                     break;
+                case LevelState.Won:
+                    print("Won!");
+                    sceneLoader.LoadScene(0);
+                    levelState = LevelState.None;
+                    break;
             }
         }
 
@@ -58,6 +71,11 @@ namespace berkepite
                 levelState = LevelState.Playing;
                 OnTargetsFinishedEvent.Invoke();
             }
+        }
+
+        public void OnPigDeath()
+        {
+            if (--pigCount == 0) levelState = LevelState.Won;
         }
 
     }
