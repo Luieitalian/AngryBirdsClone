@@ -638,7 +638,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8440998728547018882, guid: 0e85c714930d35a4fa3e2e7e73a518ae, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.01
+      value: -0.79
       objectReference: {fileID: 0}
     - target: {fileID: 8440998728547018882, guid: 0e85c714930d35a4fa3e2e7e73a518ae, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1144,7 +1144,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8440998728547018882, guid: 0e85c714930d35a4fa3e2e7e73a518ae, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.24
+      value: -1.94
       objectReference: {fileID: 0}
     - target: {fileID: 8440998728547018882, guid: 0e85c714930d35a4fa3e2e7e73a518ae, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1346,7 +1346,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8440998728547018882, guid: 0e85c714930d35a4fa3e2e7e73a518ae, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.75999993
+      value: -3.1
       objectReference: {fileID: 0}
     - target: {fileID: 8440998728547018882, guid: 0e85c714930d35a4fa3e2e7e73a518ae, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1552,7 +1552,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6586226544770002253, guid: 88d3e4b0a2ac34e469d68a31264c9b9a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -3.14
       objectReference: {fileID: 0}
     - target: {fileID: 6586226544770002253, guid: 88d3e4b0a2ac34e469d68a31264c9b9a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1603,6 +1603,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 750404793}
     m_Modifications:
+    - target: {fileID: 216502046733915470, guid: 890032bee04f2cf41a2d7cf23138935a, type: 3}
+      propertyPath: touch.m_Name
+      value: Touch
+      objectReference: {fileID: 0}
+    - target: {fileID: 216502046733915470, guid: 890032bee04f2cf41a2d7cf23138935a, type: 3}
+      propertyPath: controls.m_Name
+      value: Controls
+      objectReference: {fileID: 0}
     - target: {fileID: 3127060356158234075, guid: 890032bee04f2cf41a2d7cf23138935a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1687,7 +1695,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slingshot
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6419222758415362685, guid: 890032bee04f2cf41a2d7cf23138935a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

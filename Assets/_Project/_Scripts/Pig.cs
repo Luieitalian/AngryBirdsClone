@@ -11,6 +11,8 @@ namespace berkepite
 
         [SerializeField]
         private float damageMultiplier;
+        [SerializeField]
+        private GameObject dieEffect;
 
         void Awake()
         {
@@ -24,6 +26,7 @@ namespace berkepite
 
         public void Die()
         {
+            Instantiate(dieEffect, transform.position, Quaternion.identity, transform.root);
             Destroy(gameObject);
         }
 

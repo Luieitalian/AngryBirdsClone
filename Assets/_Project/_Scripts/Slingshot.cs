@@ -21,12 +21,34 @@ namespace berkepite
         private BaseBird spawnedBird;
         private Vector2 touchPos;
 
+        private Controls controls;
+        private InputAction touchAction;
+        private InputAction touchPosition;
+
         private enum SlingshotState
         {
             None = 0, Idle, Holding, Reloading
         }
-
         private SlingshotState state;
+
+        void Awake()
+        {
+            controls = new Controls();
+        }
+
+        void OnEnable()
+        {
+            touchPosition = controls.Player.Position;
+            touchAction = controls.Player.Touch;
+            touchPosition.Enable();
+            touchAction.Enable();
+        }
+
+        void OnDisable()
+        {
+            touchPosition.Disable();
+            touchAction.Disable();
+        }
 
         void Start()
         {
@@ -46,19 +68,19 @@ namespace berkepite
             switch (state)
             {
                 case SlingshotState.Idle:
-                    if (Mouse.current.leftButton.wasPressedThisFrame && IsWithinSlingshotArea())
+                    if (touchAction.IsPressed() && IsWithinSlingshotArea())
                         state = SlingshotState.Holding;
                     break;
                 case SlingshotState.Holding:
-                    if (Mouse.current.leftButton.isPressed)
+                    if (touchAction.IsPressed())
                     {
-                        touchPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+                        touchPos = Camera.main.ScreenToWorldPoint(touchPosition.ReadValue<Vector2>());
                         touchPos = centerPos + Vector2.ClampMagnitude(touchPos - centerPos, slingRange);
 
                         DrawSlings();
                         SetBirdPosRotation();
                     }
-                    else if (Mouse.current.leftButton.wasReleasedThisFrame)
+                    else
                     {
                         LaunchBird(spawnedBird);
                         SetLines(centerPos);
@@ -92,7 +114,7 @@ namespace berkepite
 
         bool IsWithinSlingshotArea()
         {
-            Vector2 touchPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+            Vector2 touchPos = Camera.main.ScreenToWorldPoint(touchPosition.ReadValue<Vector2>());
 
             if (Physics2D.OverlapPoint(touchPos, slingshotAreaMask)) return true;
             else return false;

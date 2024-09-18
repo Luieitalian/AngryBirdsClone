@@ -306,8 +306,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3127060356158234075}
-  - component: {fileID: 216502046733915470}
   - component: {fileID: 7150693792365608423}
+  - component: {fileID: 216502046733915470}
   m_Layer: 6
   m_Name: Slingshot
   m_TagString: Untagged
@@ -338,23 +338,6 @@ RectTransform:
   m_AnchoredPosition: {x: 287.71744, y: 206.65852}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &216502046733915470
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6324627733374427256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50acb1b1aa0f5204283f0356e6c70761, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slingRange: 1.6
-  slingshotAreaMask:
-    serializedVersion: 2
-    m_Bits: 64
-  redBirdPrefab: {fileID: 5955996803577901227, guid: b6e959be2294afd4a980cecb8d529250, type: 3}
 --- !u!58 &7150693792365608423
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -390,6 +373,23 @@ CircleCollider2D:
   m_Offset: {x: -0.35073817, y: 1.3439827}
   serializedVersion: 2
   m_Radius: 1.4377903
+--- !u!114 &216502046733915470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6324627733374427256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50acb1b1aa0f5204283f0356e6c70761, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slingRange: 1.6
+  slingshotAreaMask:
+    serializedVersion: 2
+    m_Bits: 64
+  redBirdPrefab: {fileID: 5955996803577901227, guid: b6e959be2294afd4a980cecb8d529250, type: 3}
 --- !u!1 &7456629821723008061
 GameObject:
   m_ObjectHideFlags: 0
