@@ -27,7 +27,7 @@ namespace berkepite
             {
                 float progress = Mathf.Clamp01(operation.progress / .9f);
                 slider?.SetValueWithoutNotify(progress);
-                Debug.Log("loading...");
+                Debug.Log($"Loading Scene : {sceneIndex}");
 
                 if (operation.progress >= 0.9f)
                 {
@@ -38,7 +38,7 @@ namespace berkepite
                 yield return null;
             }
 
-            Debug.Log("Loaded!");
+            Debug.Log($"Loaded Scene! : {sceneIndex}");
             StartCoroutine(SetAllowSceneActivation(operation));
         }
 

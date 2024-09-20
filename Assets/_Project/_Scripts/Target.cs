@@ -10,20 +10,26 @@ namespace berkepite
         [SerializeField] private float initializeInterval;
         [SerializeField] private float physicsInitializeInterval;
 
-        private enum TargetState
-        {
-            None = 0, Woke, Initialising, Finished
-        }
-        private TargetState targetState = TargetState.None;
-        private List<GameObject> objects;
+        private List<GameObject> childrenList;
         private int pigCount;
+        private TargetState currentState = new TargetNone();
 
-        private Action OnFinishedEvent;
+        public Action OnFinishedEvent;
 
         public int PigCount
         {
             get { return pigCount; }
             private set { pigCount = value; }
+        }
+        public float InitializeInterval
+        {
+            get { return initializeInterval; }
+            private set { initializeInterval = value; }
+        }
+        public float PhysicsInitializeInterval
+        {
+            get { return physicsInitializeInterval; }
+            private set { physicsInitializeInterval = value; }
         }
 
         void Awake()
@@ -33,55 +39,54 @@ namespace berkepite
 
             pigCount = 0;
 
-            objects = new List<GameObject>();
+            childrenList = new List<GameObject>();
             foreach (Transform child in transform)
             {
-                objects.Add(child.gameObject);
+                childrenList.Add(child.gameObject);
                 if (child.gameObject.CompareTag("Pig")) pigCount++;
             }
         }
 
         void Update()
         {
-            switch (targetState)
-            {
-                case TargetState.None: break;
-                case TargetState.Woke:
-                    StartCoroutine(InitializeTargetObjects(initializeInterval));
-                    targetState = TargetState.Initialising;
-                    break;
-                case TargetState.Initialising:
-                    break;
-                case TargetState.Finished:
-                    OnFinishedEvent.Invoke();
-                    targetState = TargetState.None;
-                    break;
-            }
+            currentState.UpdateState(this);
         }
 
         public void WakeUp()
         {
-            targetState = TargetState.Woke;
+            ChangeState(new TargetWoke());
+        }
+
+        public void Init()
+        {
+            StartCoroutine(InitializeTargetObjects(InitializeInterval));
+        }
+
+        public void ChangeState(TargetState state)
+        {
+            currentState.ExitState(this);
+            currentState = state;
+            currentState.EnterState(this);
         }
 
         private IEnumerator InitializeTargetObjects(float time)
         {
-            for (int i = 0; i < objects.Count; i++)
+            for (int i = 0; i < childrenList.Count; i++)
             {
                 yield return new WaitForSeconds(time);
-                objects[i].GetComponent<TargetObject>().Init();
+                childrenList[i].GetComponent<TargetObject>().Init();
             }
             StartCoroutine(EnablePhysicsOnTargetObjects(physicsInitializeInterval));
         }
 
         private IEnumerator EnablePhysicsOnTargetObjects(float time)
         {
-            for (int i = 0; i < objects.Count; i++)
+            for (int i = 0; i < childrenList.Count; i++)
             {
                 yield return new WaitForSeconds(time);
-                objects[i].GetComponent<TargetObject>().EnablePhysics();
+                childrenList[i].GetComponent<TargetObject>().EnablePhysics();
             }
-            targetState = TargetState.Finished;
+            ChangeState(new TargetFinished());
         }
 
     }

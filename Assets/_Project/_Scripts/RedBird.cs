@@ -4,15 +4,16 @@ namespace berkepite
 {
     public class RedBird : BaseBird
     {
+        [SerializeField] private float launchPower;
+
         private Rigidbody2D rigidBody2D;
         private CircleCollider2D circleCollider2D;
-        [SerializeField]
-        private float launchPower;
 
         void Awake()
         {
             rigidBody2D = GetComponent<Rigidbody2D>();
             rigidBody2D.bodyType = RigidbodyType2D.Kinematic;
+
             circleCollider2D = GetComponent<CircleCollider2D>();
             circleCollider2D.enabled = false;
         }

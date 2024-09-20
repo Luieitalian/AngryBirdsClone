@@ -1,16 +1,12 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace berkepite
 {
     public class Pig : MonoBehaviour
     {
-
         [SerializeField] private CHealth m_Health;
         [SerializeField] private float damageMultiplier;
-        [SerializeField] private GameObject dieEffect;
+        [SerializeField] private ParticleSystem dieEffect;
 
         void Awake()
         {
@@ -19,10 +15,6 @@ namespace berkepite
             m_Health = ScriptableObject.CreateInstance<CHealth>();
             m_Health.OnHealthDepleted(Die);
             m_Health.OnHealthDepleted(levelManager.OnPigDeath);
-        }
-
-        void Start()
-        {
         }
 
         public void Die()

@@ -7,100 +7,130 @@ namespace berkepite
 {
     public class Slingshot : MonoBehaviour
     {
+        [SerializeField] private float slingRange;
+        [SerializeField] private float reloadTime;
+        [SerializeField] private LayerMask slingshotAreaMask;
+        [SerializeField] private RedBird redBirdPrefab;
+
+        private BaseBird spawnedBird;
+
+        private Vector2 slingsPosition;
+        private Vector2 centerPosition;
+
         private LineRenderer leftLineRenderer;
         private LineRenderer rightLineRenderer;
-        private Vector2 centerPos;
-
-        [SerializeField]
-        private float slingRange;
-        [SerializeField]
-        private LayerMask slingshotAreaMask;
-
-        [SerializeField]
-        private RedBird redBirdPrefab;
-        private BaseBird spawnedBird;
-        private Vector2 touchPos;
 
         private Controls controls;
         private InputAction touchAction;
-        private InputAction touchPosition;
+        private InputAction touchPositionAction;
 
-        private enum SlingshotState
+        private SlingshotState currentState = new SlingshotNone();
+
+        public float ReloadTime
         {
-            None = 0, Initialising, Idle, Holding, Reloading
+            get { return reloadTime; }
+            private set { reloadTime = value; }
         }
-        private SlingshotState state = SlingshotState.None;
+
+        public Vector2 TouchPosition
+        {
+            get { return slingsPosition; }
+            set { slingsPosition = value; }
+        }
+
+        public InputAction TouchAction
+        {
+            get { return touchAction; }
+            private set { touchAction = value; }
+        }
+
+        public InputAction TouchPositionAction
+        {
+            get { return touchPositionAction; }
+            private set { touchPositionAction = value; }
+        }
 
         void Awake()
         {
+            currentState = new SlingshotInitialising();
+
             controls = new Controls();
-        }
-
-        void OnEnable()
-        {
-            touchPosition = controls.Player.Position;
-            touchAction = controls.Player.Touch;
-            touchPosition.Enable();
-            touchAction.Enable();
-        }
-
-        void OnDisable()
-        {
-            touchPosition.Disable();
-            touchAction.Disable();
-        }
-
-        void Start()
-        {
-            state = SlingshotState.Initialising;
 
             leftLineRenderer = transform.Find("LeftLine").GetComponent<LineRenderer>();
             rightLineRenderer = transform.Find("RightLine").GetComponent<LineRenderer>();
             leftLineRenderer.enabled = false;
             rightLineRenderer.enabled = false;
 
-            centerPos = transform.Find("CenterPivot").position;
+            centerPosition = transform.Find("CenterPivot").position;
         }
 
-        public void OnTargetsInitFinished()
+        void OnEnable()
         {
-            StartCoroutine(InstantiateBird(centerPos, 0f));
-            state = SlingshotState.Idle;
+            touchPositionAction = controls.Player.Position;
+            touchAction = controls.Player.Touch;
+            touchPositionAction.Enable();
+            touchAction.Enable();
+        }
+
+        void OnDisable()
+        {
+            touchPositionAction.Disable();
+            touchAction.Disable();
         }
 
         void Update()
         {
-            switch (state)
-            {
-                case SlingshotState.Initialising:
-                    break;
-                case SlingshotState.Idle:
-                    if (touchAction.IsPressed() && IsWithinSlingshotArea())
-                        state = SlingshotState.Holding;
-                    break;
-                case SlingshotState.Holding:
-                    if (touchAction.IsPressed())
-                    {
-                        touchPos = Camera.main.ScreenToWorldPoint(touchPosition.ReadValue<Vector2>());
-                        touchPos = centerPos + Vector2.ClampMagnitude(touchPos - centerPos, slingRange);
+            currentState.UpdateState(this);
+        }
 
-                        DrawSlings();
-                        SetBirdPosRotation();
-                    }
-                    else
-                    {
-                        LaunchBird(spawnedBird);
-                        SetLines(centerPos);
+        public void HandleHolding()
+        {
+            Vector2 touchPos = Camera.main.ScreenToWorldPoint(touchPositionAction.ReadValue<Vector2>());
+            slingsPosition = centerPosition + Vector2.ClampMagnitude(touchPos - centerPosition, slingRange);
 
-                        state = SlingshotState.Reloading;
+            DrawSlings();
+            SetBirdPosRotation();
+        }
 
-                        StartCoroutine(InstantiateBird(centerPos, 2f));
-                        state = SlingshotState.Idle;
-                    }
-                    break;
-                case SlingshotState.Reloading:
-                    break;
-            }
+        public void HandleReleased()
+        {
+            LaunchBird(spawnedBird);
+            SetLines(centerPosition);
+
+            ChangeState(new SlingshotReloading());
+        }
+
+        public void Reload()
+        {
+            StartCoroutine(ReloadBird(ReloadTime));
+        }
+
+        public void ChangeState(SlingshotState state)
+        {
+            currentState.ExitState(this);
+            currentState = state;
+            currentState.EnterState(this);
+        }
+
+        public void OnTargetsInitFinished()
+        {
+            InstantiateBird(centerPosition);
+            ChangeState(new SlingshotIdle());
+        }
+
+        public bool IsWithinSlingshotArea()
+        {
+            Vector2 touchPos = Camera.main.ScreenToWorldPoint(touchPositionAction.ReadValue<Vector2>());
+
+            if (Physics2D.OverlapPoint(touchPos, slingshotAreaMask)) return true;
+            else return false;
+        }
+
+        private IEnumerator ReloadBird(float time)
+        {
+            yield return new WaitForSeconds(time);
+            InstantiateBird(centerPosition);
+            ChangeState(new SlingshotIdle());
         }
 
         private void DrawSlings()
@@ -108,7 +138,7 @@ namespace berkepite
             leftLineRenderer.enabled = true;
             rightLineRenderer.enabled = true;
 
-            SetLines(touchPos);
+            SetLines(slingsPosition);
         }
 
         private void SetLines(Vector2 pos)
@@ -120,29 +150,20 @@ namespace berkepite
             rightLineRenderer.SetPosition(0, rightLineRenderer.transform.position);
         }
 
-        private bool IsWithinSlingshotArea()
+        private void InstantiateBird(Vector2 pos)
         {
-            Vector2 touchPos = Camera.main.ScreenToWorldPoint(touchPosition.ReadValue<Vector2>());
-
-            if (Physics2D.OverlapPoint(touchPos, slingshotAreaMask)) return true;
-            else return false;
-        }
-
-        private IEnumerator InstantiateBird(Vector2 pos, float time)
-        {
-            yield return new WaitForSeconds(time);
             spawnedBird = Instantiate(redBirdPrefab, pos, Quaternion.identity);
         }
 
         private void LaunchBird(BaseBird bird)
         {
-            bird.Launch(centerPos - touchPos);
+            bird.Launch(centerPosition - slingsPosition);
         }
 
         private void SetBirdPosRotation()
         {
-            spawnedBird.transform.position = touchPos + new Vector2(0.15f, 0);
-            spawnedBird.transform.right = centerPos - touchPos;
+            spawnedBird.transform.position = slingsPosition + new Vector2(0.15f, 0);
+            spawnedBird.transform.right = centerPosition - slingsPosition;
         }
     }
 }

@@ -1,7 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
 
 namespace berkepite
@@ -12,6 +9,7 @@ namespace berkepite
         private Animator animator;
         private SpriteRenderer spriteRenderer;
 
+        [SerializeField] private float visibleDelay = .1f;
         [SerializeField] private ParticleSystem spawnEffect;
 
         void Awake()
@@ -33,7 +31,7 @@ namespace berkepite
             if (animator)
                 animator.SetTrigger("Init");
 
-            StartCoroutine(EnableSprite(.1f));
+            StartCoroutine(EnableSprite(visibleDelay));
         }
 
         public void EnablePhysics()

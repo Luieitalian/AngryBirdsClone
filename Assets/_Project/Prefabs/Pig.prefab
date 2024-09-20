@@ -165,7 +165,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Health: {fileID: 11400000, guid: b9dfda8fbcaf1554f8fde395df2c3590, type: 2}
   damageMultiplier: 10
-  dieEffect: {fileID: 4066556664262384935, guid: 46d63a800f2ac7049b27149366fe6770, type: 3}
+  dieEffect: {fileID: 88630078674188275, guid: 46d63a800f2ac7049b27149366fe6770, type: 3}
 --- !u!114 &1594181475259940761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,6 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31f5f137bd2632a48bccca25c6c5f588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  visibleDelay: 0.1
   spawnEffect: {fileID: 3389582341696019960, guid: 3f1f8323cab3cd24583fb936ad4e6bd5, type: 3}
 --- !u!95 &4907911773592409991
 Animator:
