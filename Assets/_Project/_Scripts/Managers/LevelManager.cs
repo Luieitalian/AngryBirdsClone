@@ -24,7 +24,7 @@ namespace berkepite
 
         void Awake()
         {
-            sceneLoader = GameObject.Find("SceneLoader").GetComponent<SceneLoader>();
+            sceneLoader = FindObjectOfType<SceneLoader>();
 
             var slingshot = GameObject.Find("Slingshot").GetComponent<Slingshot>();
             OnTargetsFinishedEvent += slingshot.OnTargetsInitFinished;

@@ -5,12 +5,21 @@ namespace berkepite
 {
     public class TargetObject : MonoBehaviour
     {
+        [SerializeField] private CHealth m_Health;
+        [SerializeField] private float visibleDelay = .1f;
+        [SerializeField] private ParticleSystem spawnEffect;
+        [SerializeField] private ParticleSystem dieEffect;
+        [SerializeField] private Sprite criticalHealthSprite;
+
         private Rigidbody2D _rigidbody2D;
         private Animator animator;
         private SpriteRenderer spriteRenderer;
 
-        [SerializeField] private float visibleDelay = .1f;
-        [SerializeField] private ParticleSystem spawnEffect;
+        public CHealth Health
+        {
+            get { return m_Health; }
+            private set { m_Health = value; }
+        }
 
         void Awake()
         {
@@ -19,6 +28,11 @@ namespace berkepite
 
             spriteRenderer = GetComponent<SpriteRenderer>();
             spriteRenderer.enabled = false;
+
+            m_Health.Init();
+
+            m_Health.OnCriticalHealth(OnCriticalHealth);
+            m_Health.OnHealthDepleted(OnHealthDepleted);
 
             TryGetComponent(out animator);
         }
@@ -45,5 +59,16 @@ namespace berkepite
             spriteRenderer.enabled = true;
         }
 
+        private void OnHealthDepleted()
+        {
+            if (dieEffect)
+                Instantiate(dieEffect, transform.position, Quaternion.identity, transform.root);
+        }
+
+        private void OnCriticalHealth()
+        {
+            if (criticalHealthSprite)
+                spriteRenderer.sprite = criticalHealthSprite;
+        }
     }
 }

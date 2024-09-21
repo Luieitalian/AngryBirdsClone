@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,6 +12,9 @@ namespace berkepite
         [SerializeField] private float reloadTime;
         [SerializeField] private LayerMask slingshotAreaMask;
         [SerializeField] private RedBird redBirdPrefab;
+        [SerializeField] private AnimationCurve elasticCurve;
+
+        private Vector2 elasticAnimatingPosition; // For the slings to be animated when released.
 
         private BaseBird spawnedBird;
 
@@ -23,6 +27,7 @@ namespace berkepite
         private Controls controls;
         private InputAction touchAction;
         private InputAction touchPositionAction;
+
 
         private SlingshotState currentState = new SlingshotNone();
 
@@ -52,15 +57,19 @@ namespace berkepite
 
         void Awake()
         {
-            currentState = new SlingshotInitialising();
+            ChangeState(new SlingshotInitialising());
 
             controls = new Controls();
+            elasticAnimatingPosition = Vector2.zero;
 
             leftLineRenderer = transform.Find("LeftLine").GetComponent<LineRenderer>();
             rightLineRenderer = transform.Find("RightLine").GetComponent<LineRenderer>();
             leftLineRenderer.enabled = false;
             rightLineRenderer.enabled = false;
+        }
 
+        void Start()
+        {
             centerPosition = transform.Find("CenterPivot").position;
         }
 
@@ -95,7 +104,7 @@ namespace berkepite
         public void HandleReleased()
         {
             LaunchBird(spawnedBird);
-            SetLines(centerPosition);
+            AnimateSlingsTo(centerPosition);
 
             ChangeState(new SlingshotReloading());
         }
@@ -164,6 +173,26 @@ namespace berkepite
         {
             spawnedBird.transform.position = slingsPosition + new Vector2(0.15f, 0);
             spawnedBird.transform.right = centerPosition - slingsPosition;
+        }
+
+        private void AnimateSlingsTo(Vector2 pos)
+        {
+            elasticAnimatingPosition = leftLineRenderer.GetPosition(1);
+
+            DOTween.To(() => elasticAnimatingPosition, (val) => elasticAnimatingPosition = val, pos, 1f).SetEase(elasticCurve);
+            StartCoroutine(AnimateSlings(1f));
+        }
+
+        private IEnumerator AnimateSlings(float time)
+        {
+            float elapsedTime = 0f;
+            while (elapsedTime < time)
+            {
+                elapsedTime += Time.deltaTime;
+                SetLines(elasticAnimatingPosition);
+
+                yield return null;
+            }
         }
     }
 }

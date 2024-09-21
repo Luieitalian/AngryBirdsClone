@@ -181,7 +181,7 @@ TextureImporter:
         width: 69
         height: 220
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -189,6 +189,48 @@ TextureImporter:
       bones: []
       spriteID: e5382af58ba79b34faea6f7dfd593f77
       internalID: 1377885034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_wood_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 535
+        width: 220
+        height: 138
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23865f560da25aa46977d61873270940
+      internalID: -349320957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_wood_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 255
+        width: 219
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4af867b7445b3b458048ef9c75cf36e
+      internalID: 1626119652
       vertices: []
       indices: 
       edges: []
@@ -208,6 +250,8 @@ TextureImporter:
       spritesheet_wood_1: 266247800
       spritesheet_wood_2: 1213608598
       spritesheet_wood_3: 1377885034
+      spritesheet_wood_4: -349320957
+      spritesheet_wood_5: 1626119652
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

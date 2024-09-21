@@ -8,14 +8,12 @@ namespace berkepite
     {
         public override void EnterState(LevelManager context)
         {
-            Debug.Log("Entered LevelManagerNone state!");
         }
         public override void UpdateState(LevelManager context)
         {
         }
         public override void ExitState(LevelManager context)
         {
-            Debug.Log("Exited LevelManagerNone state!");
         }
     }
 }

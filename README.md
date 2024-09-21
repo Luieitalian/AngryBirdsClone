@@ -2,11 +2,11 @@
 
 - [x] Input system.
 - [x] Target initialization, animations & particles.
-- [ ] Slingshot tweening.
-- [ ] Destroyable structures.
+- [x] Level manager.
+- [x] Slingshot tweening.
+- [x] Destroyable structures.
+- [x] Composite colliders for structures.
 - [ ] Bird flying route when slinging.
-- [ ] Composite colliders for structures.
-- [ ] Level manager.
 - [ ] Bird speed is different depending on the screen size, fix.
 - [ ] More levels.
 - [ ] More birds.

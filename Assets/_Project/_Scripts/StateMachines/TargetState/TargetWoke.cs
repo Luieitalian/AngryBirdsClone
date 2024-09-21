@@ -6,7 +6,6 @@ namespace berkepite
     {
         public override void EnterState(Target context)
         {
-
             context.Init();
             context.ChangeState(new TargetInitialising());
         }

@@ -6,7 +6,6 @@ namespace berkepite
     {
         public override void EnterState(Slingshot context)
         {
-            Debug.Log("Entered SlingshotReloading state!");
             context.Reload();
         }
         public override void UpdateState(Slingshot context)
@@ -14,7 +13,6 @@ namespace berkepite
         }
         public override void ExitState(Slingshot context)
         {
-            Debug.Log("Exited SlingshotReloading state!");
         }
     }
 }

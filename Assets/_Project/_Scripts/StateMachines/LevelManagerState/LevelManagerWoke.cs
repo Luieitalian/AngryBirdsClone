@@ -6,7 +6,6 @@ namespace berkepite
     {
         public override void EnterState(LevelManager context)
         {
-            Debug.Log("Entered LevelManagerWoke state!");
             context.WakeUpTargets();
             context.ChangeState(new LevelManagerInitialising());
         }
@@ -15,7 +14,6 @@ namespace berkepite
         }
         public override void ExitState(LevelManager context)
         {
-            Debug.Log("Exited LevelManagerWoke state!");
         }
     }
 }

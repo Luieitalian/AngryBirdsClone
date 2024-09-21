@@ -8,7 +8,6 @@ namespace berkepite
     {
         public override void EnterState(Slingshot context)
         {
-            Debug.Log("Entered SlingshotHolding state!");
         }
         public override void UpdateState(Slingshot context)
         {
@@ -19,7 +18,6 @@ namespace berkepite
         }
         public override void ExitState(Slingshot context)
         {
-            Debug.Log("Exited SlingshotHolding state!");
         }
     }
 }
