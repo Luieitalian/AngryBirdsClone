@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1138695741610395140}
   - component: {fileID: 5990356618804638548}
   - component: {fileID: 6705252820265278058}
+  - component: {fileID: 1093747279187912562}
   - component: {fileID: 588203882912952051}
   - component: {fileID: 6310602925031564694}
   - component: {fileID: 8102050732912794922}
@@ -152,6 +153,21 @@ MonoBehaviour:
   spawnEffect: {fileID: 0}
   dieEffect: {fileID: 0}
   criticalHealthSprite: {fileID: 1377885034, guid: 30e4bb189bd442141b1ff8c4fc3f97e1, type: 3}
+--- !u!111 &1093747279187912562
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5554381826632973309}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!66 &588203882912952051
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -191,54 +207,54 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 6310602925031564694}
     m_ColliderPaths:
-    - - X: -1479850
-        Y: 8112594
-      - X: -2556023
-        Y: 8112594
-      - X: -2556023
-        Y: -8112594
-      - X: -1479850
-        Y: -8112594
+    - - X: -1480093
+        Y: 8113922
+      - X: -2556441
+        Y: 8113922
+      - X: -2556441
+        Y: -8113922
+      - X: -1480093
+        Y: -8113922
   - m_Collider: {fileID: 8102050732912794922}
     m_ColliderPaths:
-    - - X: 2556023
-        Y: -7039633
-      - X: -2556023
-        Y: -7039633
-      - X: -2556023
-        Y: -8112594
-      - X: 2556023
-        Y: -8112594
+    - - X: 2556441
+        Y: -7040785
+      - X: -2556441
+        Y: -7040785
+      - X: -2556441
+        Y: -8113922
+      - X: 2556441
+        Y: -8113922
   - m_Collider: {fileID: 6323956990298480373}
     m_ColliderPaths:
-    - - X: 2556023
-        Y: 8112594
-      - X: 1586057
-        Y: 8112594
-      - X: 1586057
-        Y: -8112594
-      - X: 2556023
-        Y: -8112594
+    - - X: 2556441
+        Y: 8113922
+      - X: 1586317
+        Y: 8113922
+      - X: 1586317
+        Y: -8113922
+      - X: 2556441
+        Y: -8113922
   - m_Collider: {fileID: 5704041667456109664}
     m_ColliderPaths:
-    - - X: 2556023
-        Y: 8112594
-      - X: -2556023
-        Y: 8112594
-      - X: -2556023
-        Y: 6968824
-      - X: 2556023
-        Y: 6968824
+    - - X: 2556441
+        Y: 8113922
+      - X: -2556441
+        Y: 8113922
+      - X: -2556441
+        Y: 6969965
+      - X: 2556441
+        Y: 6969965
   m_CompositePaths:
     m_Paths:
-    - - {x: 0.255573, y: -0.8112594}
-      - {x: 0.255573, y: 0.8112594}
-      - {x: -0.2556023, y: 0.8112301}
-      - {x: -0.255573, y: -0.8112594}
-    - - {x: 0.1586057, y: -0.7039339}
-      - {x: -0.147985, y: -0.7039339}
-      - {x: -0.1479556, y: 0.6968824}
-      - {x: 0.1586057, y: 0.696853}
+    - - {x: 0.25561482, y: -0.8113922}
+      - {x: 0.25561482, y: 0.8113922}
+      - {x: -0.2556441, y: 0.8113629}
+      - {x: -0.25561482, y: -0.8113922}
+    - - {x: 0.1586317, y: -0.7040491}
+      - {x: -0.1480093, y: -0.7040491}
+      - {x: -0.1479799, y: 0.6969965}
+      - {x: 0.1586317, y: 0.6969671}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
   m_UseDelaunayMesh: 0

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7625172780296076862}
   - component: {fileID: 9013077502242329646}
   - component: {fileID: 1594181475259940761}
-  - component: {fileID: 4907911773592409991}
+  - component: {fileID: 8492521458224150598}
   m_Layer: 0
   m_Name: Pig
   m_TagString: Pig
@@ -177,31 +177,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Health:
     m_MaxHealth: 100
-    damageMultiplier: 10
+    damageMultiplier: 7
     isHealthDepleted: 0
     hasInvokedCriticalHealth: 0
   visibleDelay: 0.1
   spawnEffect: {fileID: 3389582341696019960, guid: 3f1f8323cab3cd24583fb936ad4e6bd5, type: 3}
   dieEffect: {fileID: 88630078674188275, guid: 46d63a800f2ac7049b27149366fe6770, type: 3}
   criticalHealthSprite: {fileID: 21300000, guid: 166456fe53e7ddf46b3c8a7d291b4e73, type: 3}
---- !u!95 &4907911773592409991
-Animator:
-  serializedVersion: 5
+--- !u!111 &8492521458224150598
+Animation:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8164607902669330392}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 26f014af384ec6b45b12ead53bc4af0d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0

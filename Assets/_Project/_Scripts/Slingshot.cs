@@ -20,14 +20,15 @@ namespace berkepite
 
         private Vector2 slingsPosition;
         private Vector2 centerPosition;
+        private Vector2 launchVector;
 
+        private TrajectoryRenderer trajectoryRenderer;
         private LineRenderer leftLineRenderer;
         private LineRenderer rightLineRenderer;
 
         private Controls controls;
         private InputAction touchAction;
         private InputAction touchPositionAction;
-
 
         private SlingshotState currentState = new SlingshotNone();
 
@@ -55,12 +56,20 @@ namespace berkepite
             private set { touchPositionAction = value; }
         }
 
+        public TrajectoryRenderer TrajectoryRenderer
+        {
+            get { return trajectoryRenderer; }
+            private set { trajectoryRenderer = value; }
+        }
+
         void Awake()
         {
             ChangeState(new SlingshotInitialising());
 
             controls = new Controls();
             elasticAnimatingPosition = Vector2.zero;
+
+            trajectoryRenderer = transform.Find("TrajectoryRenderer").GetComponent<TrajectoryRenderer>();
 
             leftLineRenderer = transform.Find("LeftLine").GetComponent<LineRenderer>();
             rightLineRenderer = transform.Find("RightLine").GetComponent<LineRenderer>();
@@ -96,6 +105,9 @@ namespace berkepite
         {
             Vector2 touchPos = Camera.main.ScreenToWorldPoint(touchPositionAction.ReadValue<Vector2>());
             slingsPosition = centerPosition + Vector2.ClampMagnitude(touchPos - centerPosition, slingRange);
+            launchVector = centerPosition - slingsPosition;
+
+            TrajectoryRenderer.DrawPath(slingsPosition, launchVector * spawnedBird.LaunchPower);
 
             DrawSlings();
             SetBirdPosRotation();
@@ -166,13 +178,13 @@ namespace berkepite
 
         private void LaunchBird(BaseBird bird)
         {
-            bird.Launch(centerPosition - slingsPosition);
+            bird.Launch(launchVector);
         }
 
         private void SetBirdPosRotation()
         {
             spawnedBird.transform.position = slingsPosition + new Vector2(0.15f, 0);
-            spawnedBird.transform.right = centerPosition - slingsPosition;
+            spawnedBird.transform.right = launchVector;
         }
 
         private void AnimateSlingsTo(Vector2 pos)

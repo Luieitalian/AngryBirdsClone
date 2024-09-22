@@ -1,13 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace berkepite
 {
     public class SlingshotHolding : SlingshotState
     {
         public override void EnterState(Slingshot context)
         {
+            context.TrajectoryRenderer.Enable();
         }
         public override void UpdateState(Slingshot context)
         {
@@ -18,6 +15,7 @@ namespace berkepite
         }
         public override void ExitState(Slingshot context)
         {
+            context.TrajectoryRenderer.Disable();
         }
     }
 }

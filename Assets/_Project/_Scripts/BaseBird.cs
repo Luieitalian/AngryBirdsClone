@@ -9,6 +9,9 @@ namespace berkepite
         protected bool isLaunched = false;
         protected bool hasCollided = false;
 
+        private float launchPower;
+        public abstract float LaunchPower { get; protected set; }
+
         public abstract void Launch(Vector2 force);
     }
 }

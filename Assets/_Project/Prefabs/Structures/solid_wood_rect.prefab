@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2737552324769342508}
   - component: {fileID: 1666209104474948059}
   - component: {fileID: 8161890776184838389}
+  - component: {fileID: 2965787384931083796}
   - component: {fileID: 7643821462023435597}
   m_Layer: 0
   m_Name: solid_wood_rect
@@ -148,6 +149,21 @@ MonoBehaviour:
   spawnEffect: {fileID: 0}
   dieEffect: {fileID: 0}
   criticalHealthSprite: {fileID: -349320957, guid: 30e4bb189bd442141b1ff8c4fc3f97e1, type: 3}
+--- !u!111 &2965787384931083796
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6634197360947792633}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!61 &7643821462023435597
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -6,8 +6,11 @@
 - [x] Slingshot tweening.
 - [x] Destroyable structures.
 - [x] Composite colliders for structures.
-- [ ] Bird flying route when slinging.
+- [x] Bird flying route when slinging.
 - [ ] Bird speed is different depending on the screen size, fix.
+- [ ] Special bird skills.
+- [ ] Settings screen.
+- [ ] Level picker in main menu.
 - [ ] More levels.
 - [ ] More birds.
 - [ ] Pig sounds.

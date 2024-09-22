@@ -9,6 +9,8 @@ namespace berkepite
         private Rigidbody2D rigidBody2D;
         private CircleCollider2D circleCollider2D;
 
+        public override float LaunchPower { get { return launchPower; } protected set { launchPower = value; } }
+
         void Awake()
         {
             rigidBody2D = GetComponent<Rigidbody2D>();

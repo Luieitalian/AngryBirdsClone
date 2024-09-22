@@ -12,8 +12,9 @@ namespace berkepite
         [SerializeField] private Sprite criticalHealthSprite;
 
         private Rigidbody2D _rigidbody2D;
-        private Animator animator;
-        private SpriteRenderer spriteRenderer;
+        private Collider2D _collider;
+        private Animation _animation;
+        private SpriteRenderer _spriteRenderer;
 
         public CHealth Health
         {
@@ -26,15 +27,28 @@ namespace berkepite
             _rigidbody2D = GetComponent<Rigidbody2D>();
             _rigidbody2D.simulated = false;
 
-            spriteRenderer = GetComponent<SpriteRenderer>();
-            spriteRenderer.enabled = false;
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+            _spriteRenderer.enabled = false;
+
+            _collider = GetComponent<Collider2D>();
+            _collider.enabled = false;
 
             m_Health.Init();
 
             m_Health.OnCriticalHealth(OnCriticalHealth);
             m_Health.OnHealthDepleted(OnHealthDepleted);
 
-            TryGetComponent(out animator);
+            _animation = GetComponent<Animation>();
+        }
+
+        public void AddAnim(AnimationClip clip, string name)
+        {
+            _animation.AddClip(clip, name);
+        }
+
+        public void PlayAnim(string name)
+        {
+            _animation.Play(name);
         }
 
         public void Init()
@@ -42,8 +56,8 @@ namespace berkepite
             if (spawnEffect)
                 Instantiate(spawnEffect, transform.position, Quaternion.identity, transform);
 
-            if (animator)
-                animator.SetTrigger("Init");
+            if (_animation)
+                _animation.Play("initAnim");
 
             StartCoroutine(EnableSprite(visibleDelay));
         }
@@ -51,12 +65,13 @@ namespace berkepite
         public void EnablePhysics()
         {
             _rigidbody2D.simulated = true;
+            _collider.enabled = true;
         }
 
         private IEnumerator EnableSprite(float time)
         {
             yield return new WaitForSeconds(time);
-            spriteRenderer.enabled = true;
+            _spriteRenderer.enabled = true;
         }
 
         private void OnHealthDepleted()
@@ -68,7 +83,7 @@ namespace berkepite
         private void OnCriticalHealth()
         {
             if (criticalHealthSprite)
-                spriteRenderer.sprite = criticalHealthSprite;
+                _spriteRenderer.sprite = criticalHealthSprite;
         }
     }
 }
