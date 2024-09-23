@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 2443431226758986347}
   - component: {fileID: 1728957563363368002}
   - component: {fileID: 200639552590230449}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: hollow_wood_rect
   m_TagString: Untagged
   m_Icon: {fileID: 0}

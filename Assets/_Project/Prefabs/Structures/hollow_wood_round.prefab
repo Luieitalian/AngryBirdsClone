@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8161890776184838389}
   - component: {fileID: 2965787384931083796}
   - component: {fileID: 2626763118872501228}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: hollow_wood_round
   m_TagString: Untagged
   m_Icon: {fileID: 0}

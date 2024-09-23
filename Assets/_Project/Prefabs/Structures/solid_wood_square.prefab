@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8161890776184838389}
   - component: {fileID: 2965787384931083796}
   - component: {fileID: 7643821462023435597}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: solid_wood_square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,7 +200,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.4, y: 1.39}
+    oldSize: {x: 1.38, y: 1.39}
     newSize: {x: 2.2, y: 1.39}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

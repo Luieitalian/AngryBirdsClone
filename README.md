@@ -7,9 +7,9 @@
 - [x] Destroyable structures.
 - [x] Composite colliders for structures.
 - [x] Bird flying route when slinging.
-- [ ] Add ASMDEF.
+- [x] Add ASMDEF.
+- [x] Special bird skills.
 - [ ] More birds.
-- [ ] Special bird skills.
 - [ ] Limit avaliable birds.
 - [ ] Bird speed is different depending on the screen size, fix.
 - [ ] Settings screen.

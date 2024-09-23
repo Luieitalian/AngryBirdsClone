@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 8102050732912794922}
   - component: {fileID: 6323956990298480373}
   - component: {fileID: 5704041667456109664}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: hollow_wood_tall
   m_TagString: Untagged
   m_Icon: {fileID: 0}

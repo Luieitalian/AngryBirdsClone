@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8161890776184838389}
   - component: {fileID: 2965787384931083796}
   - component: {fileID: 7643821462023435597}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: solid_wood_tall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
