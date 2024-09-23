@@ -34,7 +34,7 @@ namespace berkepite
             circleCollider2D.enabled = true;
         }
 
-        void OnCollisionEnter2D(Collision2D collision)
+        private void OnCollisionEnter2D(Collision2D collision)
         {
             hasCollided = true;
         }

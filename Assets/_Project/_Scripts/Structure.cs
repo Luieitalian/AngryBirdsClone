@@ -10,9 +10,11 @@ namespace berkepite
         void Awake()
         {
             m_TargetObject = GetComponent<TargetObject>();
-
             m_TargetObject.Health.OnHealthDepleted(Destroy);
+        }
 
+        void Start()
+        {
             m_TargetObject.AddAnim(CreateInitAnimationClip(), "initAnim");
         }
 

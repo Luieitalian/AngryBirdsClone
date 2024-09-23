@@ -27,27 +27,22 @@ namespace berkepite
 
         public void DrawPath(Vector2 startPos, Vector2 velocity)
         {
-            // Clear the existing path
             lineRenderer.positionCount = 0;
 
-            // Create an array to hold the positions
             Vector3[] pathPoints = new Vector3[resolution];
 
-            // Populate the path
             for (int i = 0; i < resolution; i++)
             {
                 float t = i * timeStep;
-                // Calculate the position using projectile motion equations
+
                 Vector2 point = CalculatePosition(startPos, velocity, t);
                 pathPoints[i] = new Vector3(point.x, point.y, 0);
             }
 
-            // Apply the points to the LineRenderer
             lineRenderer.positionCount = resolution;
             lineRenderer.SetPositions(pathPoints);
         }
 
-        // Function to calculate position based on time
         private Vector2 CalculatePosition(Vector2 startPos, Vector2 velocity, float time)
         {
             float x = startPos.x + velocity.x * time;
