@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Health:
-    m_MaxHealth: 50
+    m_MaxHealth: 40
     damageMultiplier: 1
     isHealthDepleted: 0
     hasInvokedCriticalHealth: 0

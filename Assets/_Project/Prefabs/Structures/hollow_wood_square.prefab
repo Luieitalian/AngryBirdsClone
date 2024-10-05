@@ -146,7 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Health:
     m_MaxHealth: 20
-    damageMultiplier: 1
+    damageMultiplier: 0.8
     isHealthDepleted: 0
     hasInvokedCriticalHealth: 0
   visibleDelay: 0.1

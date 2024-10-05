@@ -10,13 +10,12 @@ namespace berkepite
         [SerializeField] private float slingRange;
         [SerializeField] private float reloadTime;
         [SerializeField] private LayerMask slingshotAreaMask;
-        [SerializeField] private RedBird redBirdPrefab;
         [SerializeField] private AnimationCurve elasticCurve;
-
-        private Vector2 elasticAnimatingPosition; // For the slings to be animated when released.
+        [SerializeField] private LevelManager levelManager;
 
         private BaseBird spawnedBird;
 
+        private Vector2 elasticAnimatingPosition; // For the slings to be animated when released.
         private Vector2 slingsPosition;
         private Vector2 centerPosition;
         private Vector2 launchVector;
@@ -106,7 +105,7 @@ namespace berkepite
             slingsPosition = centerPosition + Vector2.ClampMagnitude(touchPos - centerPosition, slingRange);
             launchVector = centerPosition - slingsPosition;
 
-            TrajectoryRenderer.DrawPath(slingsPosition, launchVector * spawnedBird.LaunchPower);
+            TrajectoryRenderer.DrawPath(slingsPosition, launchVector * spawnedBird.launchPower);
 
             DrawSlings();
             SetBirdPosRotation();
@@ -134,7 +133,7 @@ namespace berkepite
 
         public void OnTargetsInitFinished()
         {
-            InstantiateBird(centerPosition);
+            RequestBirdFromLevelManager(centerPosition);
             ChangeState(new SlingshotIdle());
         }
 
@@ -146,10 +145,15 @@ namespace berkepite
             else return false;
         }
 
+        public void OnLevelLost()
+        {
+            ChangeState(new SlingshotNone());
+        }
+
         private IEnumerator ReloadBird(float time)
         {
             yield return new WaitForSeconds(time);
-            InstantiateBird(centerPosition);
+            RequestBirdFromLevelManager(centerPosition);
             ChangeState(new SlingshotIdle());
         }
 
@@ -170,9 +174,10 @@ namespace berkepite
             rightLineRenderer.SetPosition(0, rightLineRenderer.transform.position);
         }
 
-        private void InstantiateBird(Vector2 pos)
+        private void RequestBirdFromLevelManager(Vector2 pos)
         {
-            spawnedBird = Instantiate(redBirdPrefab, pos, Quaternion.identity);
+            var bird = levelManager.RequestBird(pos);
+            if (bird) spawnedBird = bird;
         }
 
         private void LaunchBird(BaseBird bird)

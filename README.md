@@ -9,8 +9,8 @@
 - [x] Bird flying route when slinging.
 - [x] Add ASMDEF.
 - [x] Special bird skills.
-- [ ] More birds.
-- [ ] Limit avaliable birds.
+- [x] More birds.
+- [x] Limit avaliable birds.
 - [ ] Bird speed is different depending on the screen size, fix.
 - [ ] Settings screen.
 - [ ] Level picker in main menu.

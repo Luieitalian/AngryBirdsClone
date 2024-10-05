@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1666209104474948059}
   - component: {fileID: 8161890776184838389}
   - component: {fileID: 2965787384931083796}
-  - component: {fileID: 6365712226048711035}
+  - component: {fileID: 3396386629980952795}
   m_Layer: 7
   m_Name: hollow_wood_tri
   m_TagString: Untagged
@@ -141,8 +141,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Health:
-    m_MaxHealth: 50
-    damageMultiplier: 1
+    m_MaxHealth: 15
+    damageMultiplier: 0.8
     isHealthDepleted: 0
     hasInvokedCriticalHealth: 0
   visibleDelay: 0.1
@@ -164,8 +164,8 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!68 &6365712226048711035
-EdgeCollider2D:
+--- !u!60 &3396386629980952795
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -197,13 +197,29 @@ EdgeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.39, y: 0.69}
+    newSize: {x: 2.2, y: 1.39}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   m_Points:
-  - {x: 0.69919, y: -0.337699}
-  - {x: -0.705844, y: -0.3415085}
-  - {x: -0.006760448, y: 0.34770274}
-  - {x: 0.6996298, y: -0.33349717}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
+    m_Paths:
+    - - {x: -0.0037081093, y: 0.36216176}
+      - {x: -0.17293496, y: 0.2235148}
+      - {x: -0.6980911, y: -0.34478417}
+      - {x: -0.6883684, y: -0.34485278}
+      - {x: 0.695, y: -0.345}
+      - {x: 0.6944485, y: -0.3445256}
+      - {x: 0.068031535, y: 0.3008698}
+    - - {x: -0.235, y: -0.085}
+      - {x: -0.2351058, y: -0.085}
+      - {x: -0.005, y: 0.13499999}
+      - {x: 0.16499999, y: -0.035}
+      - {x: 0.3295168, y: -0.17235503}
+      - {x: -0.315, y: -0.16499999}
+      - {x: -0.327065, y: -0.16745141}
+  m_UseDelaunayMesh: 0

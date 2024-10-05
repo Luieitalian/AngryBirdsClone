@@ -5,25 +5,23 @@ namespace berkepite
 {
     public class RedBird : BaseBird
     {
-        [SerializeField] private float launchPower = 10;
         [SerializeField] private float birdAbilityPower = 1;
         [SerializeField] private ParticleSystem abilityEffect;
         [SerializeField] private LayerMask abilityEffectAreaMask;
 
-        private ContactFilter2D contactFilter2D; // To use with Collider2D.OverlapCollider in UseAbility
         private PolygonCollider2D abilityEffectArea;
-        private Rigidbody2D rigidBody2D;
-        private CircleCollider2D circleCollider2D;
-
-        public override float LaunchPower { get { return launchPower; } protected set { launchPower = value; } }
+        private ContactFilter2D contactFilter2D; // To use with Collider2D.OverlapCollider in UseAbility
 
         void Awake()
         {
+            controls = new Controls();
+
             contactFilter2D = new ContactFilter2D();
             contactFilter2D.useLayerMask = true;
             contactFilter2D.SetLayerMask(abilityEffectAreaMask);
 
-            controls = new Controls();
+            renderer2D = GetComponent<SpriteRenderer>();
+
             abilityEffectArea = transform.Find("AbilityEffectArea").GetComponent<PolygonCollider2D>();
 
             rigidBody2D = GetComponent<Rigidbody2D>();
@@ -74,18 +72,10 @@ namespace berkepite
             }
         }
 
-        public override void Launch(Vector2 force)
-        {
-            rigidBody2D.bodyType = RigidbodyType2D.Dynamic;
-            rigidBody2D.AddForce(force * launchPower, ForceMode2D.Impulse);
-
-            isLaunched = true;
-            circleCollider2D.enabled = true;
-        }
-
         private void OnCollisionEnter2D(Collision2D collision)
         {
             hasCollided = true;
+            renderer2D.sprite = collidedSprite;
         }
     }
 }
