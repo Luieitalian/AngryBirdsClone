@@ -9,6 +9,10 @@ namespace berkepite
         [SerializeField] private List<BaseBird> remainingBirds;
         [SerializeField] private GameObject remainingBirdSlotPrefab;
 
+        public int pigCount = 0;
+
+        public Action OnLevelLost;
+
         private int remainingBirdsCounter;
         private GameObject remainingBirdsUI;
         private LevelManagerState currentState = new LevelManagerNone();
@@ -16,12 +20,9 @@ namespace berkepite
         private List<GameObject> targetObjects;
 
         private int targetsFinishedCount = 0;
-        private int pigCount = 0;
 
         private SceneLoader sceneLoader;
         private Action OnTargetsFinishedEvent;
-        private Action OnLevelLost;
-        private Action OnLevelWon;
 
         public SceneLoader SceneLoader
         {
@@ -99,8 +100,8 @@ namespace berkepite
             }
             else
             {
-                OnLevelLost.Invoke();
-                Debug.Log("Level Lost!");
+                if (currentState is not LevelManagerWon)
+                    ChangeState(new LevelManagerWaiting());
                 return null;
             }
         }
@@ -118,10 +119,10 @@ namespace berkepite
                 Debug.Break();
             }
 
-            foreach (var item in remainingBirds)
+            foreach (var bird in remainingBirds)
             {
                 var slot = Instantiate(remainingBirdSlotPrefab, Vector3.zero, Quaternion.identity, remainingBirdsUI.transform);
-                slot.GetComponent<SpriteRenderer>().sprite = item.GetComponent<SpriteRenderer>().sprite;
+                slot.GetComponent<SpriteRenderer>().sprite = bird.GetComponent<SpriteRenderer>().sprite;
             }
         }
 

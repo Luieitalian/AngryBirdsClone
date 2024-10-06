@@ -15,7 +15,10 @@ namespace berkepite
 
             m_TargetObject.Health.OnHealthDepleted(Die);
             m_TargetObject.Health.OnHealthDepleted(levelManager.OnPigDeath);
+        }
 
+        void Start()
+        {
             m_TargetObject.AddAnim(CreateInitAnimationClip(), "initAnim");
         }
 

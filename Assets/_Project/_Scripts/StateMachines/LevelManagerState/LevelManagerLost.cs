@@ -6,6 +6,8 @@ namespace berkepite
     {
         public override void EnterState(LevelManager context)
         {
+            context.OnLevelLost.Invoke();
+            Debug.Log("Level Lost!");
         }
         public override void UpdateState(LevelManager context)
         {
