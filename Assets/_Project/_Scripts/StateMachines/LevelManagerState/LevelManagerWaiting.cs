@@ -20,7 +20,7 @@ namespace berkepite
         private IEnumerator WaitForPigsToDie(float time, LevelManager context)
         {
             yield return new WaitForSeconds(time);
-            if (context.pigCount == 0)
+            if (context.PigCount == 0)
                 context.ChangeState(new LevelManagerWon());
             else
                 context.ChangeState(new LevelManagerLost());

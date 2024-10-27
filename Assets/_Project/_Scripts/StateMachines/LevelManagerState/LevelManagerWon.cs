@@ -6,7 +6,7 @@ namespace berkepite
     {
         public override void EnterState(LevelManager context)
         {
-            Debug.Log("Won!");
+            Debug.Log("Level Won!");
             //context.SceneLoader?.LoadScene(0);
         }
         public override void UpdateState(LevelManager context)

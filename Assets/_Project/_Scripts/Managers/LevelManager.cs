@@ -6,51 +6,61 @@ namespace berkepite
 {
     public class LevelManager : MonoBehaviour
     {
-        [SerializeField] private List<BaseBird> remainingBirds;
-        [SerializeField] private GameObject remainingBirdSlotPrefab;
-
-        public int pigCount = 0;
-
-        public Action OnLevelLost;
-
-        private int remainingBirdsCounter;
-        private GameObject remainingBirdsUI;
-        private LevelManagerState currentState = new LevelManagerNone();
-
-        private List<GameObject> targetObjects;
+        [SerializeField] private List<BaseBird> initialBirds;
+        [SerializeField] private RemainingBirdsUI _remainingBirdsUI;
+        [SerializeField] private SceneLoader _sceneLoader;
+        [SerializeField] private Slingshot _slingshot;
 
         private int targetsFinishedCount = 0;
+        private int usedBirdsCounter = 0;
+        private int pigCount = 0;
 
-        private SceneLoader sceneLoader;
+        private LevelManagerState currentState = new LevelManagerNone();
+        private List<GameObject> _targetObjects;
+
+        public Action OnLevelLost;
         private Action OnTargetsFinishedEvent;
 
         public SceneLoader SceneLoader
         {
-            get { return sceneLoader; }
-            private set { sceneLoader = value; }
+            get { return _sceneLoader; }
+            private set { _sceneLoader = value; }
+        }
+
+        public List<BaseBird> InitialBirds
+        {
+            get { return initialBirds; }
+            private set { initialBirds = value; }
+        }
+
+        public int PigCount
+        {
+            get { return pigCount; }
+            private set { pigCount = value; }
+        }
+
+        public int UsedBirdsCounter
+        {
+            get { return usedBirdsCounter; }
+            private set { usedBirdsCounter = value; }
         }
 
         void Awake()
         {
-            remainingBirdsUI = GameObject.Find("RemainingBirdsUI");
+            _remainingBirdsUI.SetUI();
 
-            SetRemainingBirdsUI();
-
-            sceneLoader = FindObjectOfType<SceneLoader>();
-
-            var slingshot = GameObject.Find("Slingshot").GetComponent<Slingshot>();
-            OnLevelLost += slingshot.OnLevelLost;
-            OnTargetsFinishedEvent += slingshot.OnTargetsInitFinished;
+            OnLevelLost += _slingshot.OnLevelLost;
+            OnTargetsFinishedEvent += _slingshot.OnTargetsInitFinished;
         }
 
         void Start()
         {
             // Get Targets & add target pig counts
-            targetObjects = new List<GameObject>();
+            _targetObjects = new List<GameObject>();
             var targets = FindObjectsOfType<Target>();
             foreach (var target in targets)
             {
-                targetObjects.Add(target.gameObject);
+                _targetObjects.Add(target.gameObject);
                 pigCount += target.PigCount;
             }
             ChangeState(new LevelManagerWoke());
@@ -63,7 +73,7 @@ namespace berkepite
 
         public void WakeUpTargets()
         {
-            foreach (var target in targetObjects)
+            foreach (var target in _targetObjects)
             {
                 target.GetComponent<Target>().WakeUp();
             }
@@ -78,7 +88,7 @@ namespace berkepite
 
         public void OnTargetFinished()
         {
-            if (++targetsFinishedCount == targetObjects.Count)
+            if (++targetsFinishedCount == _targetObjects.Count)
             {
                 ChangeState(new LevelManagerPlaying());
                 OnTargetsFinishedEvent.Invoke();
@@ -92,10 +102,10 @@ namespace berkepite
 
         public BaseBird RequestBird(Vector2 pos)
         {
-            if (remainingBirdsCounter < remainingBirds.Count)
+            if (usedBirdsCounter < initialBirds.Count)
             {
-                var newBird = Instantiate(remainingBirds[remainingBirdsCounter++], pos, Quaternion.identity, transform.root);
-                UpdateRemainingBirdsUI();
+                var newBird = Instantiate(initialBirds[usedBirdsCounter++], pos, Quaternion.identity, transform.root);
+                _remainingBirdsUI.UpdateUI();
                 return newBird;
             }
             else
@@ -105,26 +115,5 @@ namespace berkepite
                 return null;
             }
         }
-
-        public void UpdateRemainingBirdsUI()
-        {
-            Destroy(remainingBirdsUI.transform.GetChild(0).gameObject);
-        }
-
-        private void SetRemainingBirdsUI()
-        {
-            if (remainingBirds.Count == 0)
-            {
-                Debug.LogError("There is no remaining birds in 'remainingBirds' variable!\nPlease add birds!");
-                Debug.Break();
-            }
-
-            foreach (var bird in remainingBirds)
-            {
-                var slot = Instantiate(remainingBirdSlotPrefab, Vector3.zero, Quaternion.identity, remainingBirdsUI.transform);
-                slot.GetComponent<SpriteRenderer>().sprite = bird.GetComponent<SpriteRenderer>().sprite;
-            }
-        }
-
     }
 }

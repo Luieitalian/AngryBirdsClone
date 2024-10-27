@@ -8,7 +8,7 @@ namespace berkepite
         {
             if (other.CompareTag("Pig"))
             {
-                Debug.Log("its pig!");
+                Debug.Log("Pig eliminated by GameBoundaries!");
                 other.GetComponent<Pig>().GetComponent<TargetObject>().Health.TakeDamage(1000);
             }
         }
